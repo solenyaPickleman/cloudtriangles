@@ -1,5 +1,7 @@
 # front-end
 
+A front end for the cloudtriangle cracker barrel peg solitaire game. 
+
 ## Project setup
 ```
 npm install

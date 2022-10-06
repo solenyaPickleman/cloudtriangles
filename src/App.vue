@@ -1,16 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your diceco App"/>
+  <TriangleGame :state="[True, False]" /> 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TriangleGame from './components/TriangleGame.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    TriangleGame
+}
 }
 </script>
 
