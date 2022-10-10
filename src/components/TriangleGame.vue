@@ -1,5 +1,5 @@
 <template>
-    <div 
+    <div class="pegrow"
         v-for="index in Array.from({length:5},(v,k)=>k+1)" 
         :key="index"
          >
@@ -8,6 +8,8 @@
             :key="index"  
             class="peg" 
             alt="RedCircle" 
+            height="512"
+            width="512"
             src="../assets/red-circle.png">
     </div>
     <div> 
@@ -50,7 +52,6 @@ export default {
     align-items: center;
     margin-right: 10px;
     padding: 6px 10px;
-    height : 10%; 
-    width: 10%;
+    width: 7.5%;
 }
 </style>

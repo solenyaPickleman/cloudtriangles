@@ -10,6 +10,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
+nvm use 16 
 npx wrangler pages dev -- npm run serve
 ```
 
