@@ -8,7 +8,6 @@
             :key="index"  
             class="peg" 
             alt="RedCircle" 
-            height="512"
             width="512"
             src="../assets/red-circle.png">
     </div>
