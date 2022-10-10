@@ -15,9 +15,10 @@
             >
     </div>
     <div> 
-        <button color="blue-grey" > {{displayText}}  </button>
-        <button color="blue-grey" > {{displayText}}  </button>
-        <button color="blue-grey" > {{displayText}}  </button>
+        <button class = 'navbutton' v-if="solution.length != 0 " v-on:click="previousMove" > Previous Move </button>
+        <button class = 'navbutton' v-if="solution.length == 0" v-on:click="getSolution($event)" > Click to find solution  </button>
+        <button class = 'navbutton' v-if="solution.length != 0" disabled='true'> Click the game board to reset  </button>
+        <button class = 'navbutton' v-if="solution.length != 0 " v-on:click="nextMove" > Next Move </button>
     </div>
 </template>
 
@@ -33,7 +34,9 @@ export default {
   data() {
     return {
       displayText : '',
-      state : []
+      state : [],
+      solution : [] ,
+      solution_index : 0
     }
   },
   methods: {
@@ -56,6 +59,31 @@ export default {
     async circleClick(event ) {
       let index = event.target.id ; 
       this.state = this.initializeGameState(index);
+      this.solution = [] ; 
+      this.solution_index = 0;
+    },
+    async reset() {
+      this.state = this.initializeGameState(4);
+      this.solution = [] ; 
+      this.solution_index = 0;
+    },
+    async getSolution() {
+      let solution  = await  axios.post('/api/solver',  { 'game' : this.state} )
+        .then(function (response) {
+          let {solution} = response.data ;
+          return solution
+        });
+      this.solution = solution;
+      this.solution_index = 0; 
+      this.state = solution[0];
+    },
+    async nextMove() { 
+      this.solution_index = this.solution_index +1 < this.solution.length  ?  this.solution_index + 1 : this.solution_index  ; 
+      this.state= this.solution[this.solution_index] ; 
+    },
+    async previousMove() { 
+      this.solution_index = this.solution_index -1 < 0 ? 0 :   this.solution_index -1  ; 
+      this.state= this.solution[this.solution_index] ; 
     },
     getSource(a,b ) { 
       var images = require.context('../assets/', false, /\.png$/);
@@ -77,10 +105,13 @@ export default {
     align-items: center;
     margin-right: 10px;
     padding: 6px 10px;
-    width: 7.5%;
+    width: 6%;
 }
 
 .redpeg { 
   content: url("../assets/red-circle.png")
+}
+.navbutton {
+  background-color :honeydew
 }
 </style>
