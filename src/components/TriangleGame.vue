@@ -11,20 +11,35 @@
             src="../assets/red-circle.png">
     </div>
     <div> 
-        <button color="blue-grey" > Block Button </button>
-        <button color="blue-grey" > Block Button </button>
-        <button color="blue-grey" > Block Button </button>
+        <button color="blue-grey" > {{displayText}}  </button>
+        <button color="blue-grey" > {{displayText}}  </button>
+        <button color="blue-grey" > {{displayText}}  </button>
     </div>
 </template>
 
 <script>
+import axios from 'axios'; 
 
 export default {
   name: 'TriangleGame',
   props: {
     state : Array
   },
-  components: {  }
+  components: {  },
+  data() {
+    return {
+      displayText : ''
+    }
+  },
+  methods: {
+    async getText() { 
+      const response = await axios.get('/hello-world');
+      this.displayText = ( response.data || "error in calling!" ) ; 
+    }
+  },
+  async mounted() { 
+    await this.getText();
+  }
 }
 </script>
 

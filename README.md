@@ -4,12 +4,13 @@ A front end for the cloudtriangle cracker barrel peg solitaire game.
 
 ## Project setup
 ```
+nvm use 16 
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npx wrangler pages dev -- npm run serve
 ```
 
 ### Compiles and minifies for production
