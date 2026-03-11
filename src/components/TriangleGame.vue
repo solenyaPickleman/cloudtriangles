@@ -101,18 +101,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .peg {
-    /* display: inline-flex; */
     align-items: center;
     margin-right: 10px;
-    padding: 6px 10px;
+    padding: 3px 10px;
     width: 6%;
+    touch-action: manipulation;
 }
 
 .button-bar {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .navbutton {
@@ -126,6 +126,7 @@ export default {
   color: #33cccc;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
+  touch-action: manipulation;
 }
 
 .navbutton:hover {

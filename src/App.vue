@@ -28,12 +28,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .banner {
   width: 100%;
-  padding:20px 0;
+  padding: 12px 0;
   text-align: center;
   background: #33cccc;
   color: white;
@@ -62,8 +64,8 @@ a{
 }
 
 h1 {
-  font-size: 5vw;
-  padding: 10px 0;
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  padding: 6px 0;
   font-weight: 600;
 }
 
