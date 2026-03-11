@@ -14,11 +14,11 @@
             :src= "getSource(index, element)"
             >
     </div>
-    <div> 
-        <button class = 'navbutton' v-if="solution.length != 0 " v-on:click="previousMove" > Previous Move </button>
-        <button class = 'navbutton' v-if="solution.length == 0" v-on:click="getSolution($event)" > Click to find solution  </button>
-        <button class = 'navbutton' v-if="solution.length != 0" disabled='true'> Click the game board to reset  </button>
-        <button class = 'navbutton' v-if="solution.length != 0 " v-on:click="nextMove" > Next Move </button>
+    <div class="button-bar">
+        <button class="navbutton" v-if="solution.length != 0" v-on:click="previousMove">Previous</button>
+        <button class="navbutton primary" v-if="solution.length == 0" v-on:click="getSolution($event)">Solve</button>
+        <button class="navbutton hint" v-if="solution.length != 0" disabled>Click board to reset</button>
+        <button class="navbutton" v-if="solution.length != 0" v-on:click="nextMove">Next</button>
     </div>
 </template>
 
@@ -85,10 +85,10 @@ export default {
       this.solution_index = this.solution_index -1 < 0 ? 0 :   this.solution_index -1  ; 
       this.state= this.solution[this.solution_index] ; 
     },
-    getSource(a,b ) { 
-      var images = require.context('../assets/', false, /\.png$/);
+    getSource(a,b ) {
       let index = this.getIndex(a,b);
-      return   images( "./" + ( this.state[index] ? "red-circle" : "white-circle" ) + ".png") ;
+      let filename = this.state[index] ? "red-circle" : "white-circle";
+      return new URL(`../assets/${filename}.png`, import.meta.url).href;
     }
   },
   async mounted() { 
@@ -108,10 +108,55 @@ export default {
     width: 6%;
 }
 
-.redpeg { 
-  content: url("../assets/red-circle.png")
+.button-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
 }
+
 .navbutton {
-  background-color :honeydew
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border: 2px solid #33cccc;
+  border-radius: 8px;
+  background: white;
+  color: #33cccc;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbutton:hover {
+  background: #e0f7f7;
+}
+
+.navbutton:active {
+  background: #b2ebeb;
+}
+
+.navbutton.primary {
+  background: #33cccc;
+  color: white;
+}
+
+.navbutton.primary:hover {
+  background: #2db8b8;
+}
+
+.navbutton.primary:active {
+  background: #28a6a6;
+}
+
+.navbutton.hint {
+  border-color: #ccc;
+  color: #999;
+  cursor: default;
+  font-style: italic;
+}
+
+.navbutton.hint:hover {
+  background: white;
 }
 </style>
